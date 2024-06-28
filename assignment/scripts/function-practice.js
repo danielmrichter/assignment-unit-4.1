@@ -93,27 +93,46 @@ console.log(`negative test run of find: `, find(33,testArray));
 // ----------------------
 // 8. Function to check if a letter is the first letter in a 
 //    string. Return true if it is, and false otherwise
-function isFirstLetter(letter, string) {
-
-}
+function isFirstLetter(letter,string) {
+  console.log(`Checking if ${letter} is the first letter of ${string}`);
+  if (letter == string[0])
+    return true
+  else
+    return false
+  }
+console.log(`first letter check:`, isFirstLetter(`d`,`house`));
 
 
 // 9. Function to return the sum of all numbers in an array
 function sumAll(array) {
+  console.log(`summing up ${array}`);
   let sum = 0;
   // TODO: loop to add items
-
+  for(let part of array)
+    sum += part
   // TODO: return the sum
+  return sum
 }
-
+console.log(`test sumAll using testarray:`, sumAll(testArray));
 // 10. Function to return a new array of all positive (greater than zero)
 //     numbers contained in an input array. If there are no positive numbers
 //     return an empty array. Note: The input array should not change.
-function allPositive() {
-
+function allPositive(inputArray) {
+  console.log(`checking for positive numbers in ${inputArray}`);
+  let positiveArray = []
+  let holdingVar
+  for(let i=0;i>inputArray.length;i++){
+    if (inputArray[i] > 0){
+      holdingVar = inputArray.slice(i, i+1)
+      positiveArray.push(holdingVar.pop()) // deadge
+    }
+  return positiveArray
+  }
 }
-
-
+let testPositiveArray = [1,5,8,4,-3,0,-6,6]
+console.log(`before allPositive`, testPositiveArray);
+console.log(`test for allPositive`, allPositive(testPositiveArray));
+console.log(`After allPositive to make sure array wasn't changed`, testPositiveArray);
 // 11. Pick a problem from Edabit(https://edabit.com/) or 
 //     CodeWars(https://www.codewars.com/). Then describe it 
 //     here in a comment, write the function, and test it!
