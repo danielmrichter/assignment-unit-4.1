@@ -57,7 +57,12 @@ let testArray = [1,2,3,4,5,6,7,8,9]
 console.log(`before running the function:`, testArray);
 function getLast(array) {
   console.log(`the array to check the last number of: `, array);
+  if (array.length == 0){
+    return undefined
+  }
+  else {
   return array.pop()
+  }
 } // end getLast
 console.log(`Running getLast: `, getLast(testArray));
 console.log(`After running getLast: `, testArray);
@@ -67,8 +72,12 @@ console.log(`After running getLast: `, testArray);
 let backupArray = [1,2,3,4,5,6,7,8,9]
 function getLastNoRemove(array){
   console.log(`Running getLastNoRemove with array: `, array);
+  if (array.length == 0){
+    return undefined
+  }
+  else {
   let lastNumber = array.length - 1
-  return array.at(lastNumber);
+  return array.at(lastNumber);}
 } // end getLastNoRemove
 console.log(`Get Last without removing it: `, getLastNoRemove(backupArray));
 console.log(backupArray);
@@ -77,7 +86,7 @@ console.log(backupArray);
 //    value is found and false otherwise. Use a loop;
 //    DO NOT use Array.includes, Array.indexOf, or Array.find 
 function find(value, array) {
-  console.log(`Checking for`, value, `in`, array);
+  console.log(`Checking for ${value} in ${array}`);
   for (let i=0; i<array.length; i++) {
    if (array[i] == value)
     return true
@@ -120,15 +129,12 @@ console.log(`test sumAll using testarray:`, sumAll(testArray));
 function allPositive(inputArray) {
   console.log(`checking for positive numbers in ${inputArray}`);
   let positiveArray = []
-  let holdingVar
-  for(let i=0;i>inputArray.length;i++){
-    if (inputArray[i] > 0){
-      holdingVar = inputArray.slice(i, i+1)
-      positiveArray.push(holdingVar.pop()) // deadge
+  for (let number of inputArray)
+    if (number > 0) {
+      positiveArray.push(number)
     }
   return positiveArray
   }
-}
 let testPositiveArray = [1,5,8,4,-3,0,-6,6]
 console.log(`before allPositive`, testPositiveArray);
 console.log(`test for allPositive`, allPositive(testPositiveArray));
@@ -136,6 +142,89 @@ console.log(`After allPositive to make sure array wasn't changed`, testPositiveA
 // 11. Pick a problem from Edabit(https://edabit.com/) or 
 //     CodeWars(https://www.codewars.com/). Then describe it 
 //     here in a comment, write the function, and test it!
+
+// Usually when you buy something, you're asked whether your credit card number, phone number or answer
+// to your most secret question is still correct. However, since someone could look over your shoulder,
+// you don't want that shown on your screen. Instead, we mask it.
+// Your task is to write a function maskify, which changes all but the last four characters into '#'.
+function maskify(cc) {
+  let holdingVar
+  if (Number.isInteger(cc) ==true) {
+    holdingVar = cc.toString()
+  }
+  if (Number.isInteger(cc) ==false){
+    holdingVar = cc
+  }
+  let lastFour = holdingVar.slice(-4);
+  return lastFour.padStart(holdingVar.length, '#')
+}
+//this isn't a real number, its random
+console.log(`test for maskify: ${maskify(2034399002125581)}`);
+console.log(`test for maskify: ${maskify(`2034399002125581`)}`);
+
+
+//I did more, cause I had time, posted below if I figured it out or didn't
+
+//Write a function that will return the count of distinct case-insensitive alphabetic characters and 
+//numeric digits that occur more than once in the input string. 
+//The input string can be assumed to contain only alphabets (both uppercase and lowercase) and numeric digits.
+// function duplicateCount(text){
+//   let fixedText = text.toLowerCase().trim()
+//   fixedText = fixedText.replace(/\s+/g, '');
+//   let holdingArray = Array.from(fixedText)
+//   let returnValue
+//   for (let i=0;i<holdingArray.length;i++){         // I gave up on this, I couldn't
+//     if (holdingArray.filter(holdingArray[i]) > 2)  // get it to work, I don't understand
+//       holdingArray.splice(holdingArray[i])          // the filter method
+//   }
+//   for (let part of holdingArray)
+//     if (holdingArray.filter(part) == 2)
+//       returnValue++
+//   return returnValue
+//   }
+// console.log(`test for duplicateCount ${duplicateCount(`Tessssst phrase`)}`);
+
+
+//Deoxyribonucleic acid (DNA) is a chemical found in the nucleus of cells and carries the 
+// "instructions" for the development and functioning of living organisms.
+
+// If you want to know more: http://en.wikipedia.org/wiki/DNA
+
+// In DNA strings, symbols "A" and "T" are complements of each other, as "C" and "G". Your function receives 
+// one side of the DNA (string, except for Haskell); you need to return the other complementary side. DNA strand 
+// is never empty or there is no DNA at all (again, except for Haskell).
+
+
+function dnaStrand(dna){
+  let holdingVar = dna.toUpperCase()  //this is to make it not case sensitive, though its not specified
+  holdingVar = Array.from(holdingVar) 
+  for(let i=0;i<holdingVar.length;i++){
+    if (holdingVar[i] === 'A')
+      holdingVar.splice(i,1,`T`)
+    else if (holdingVar[i] === `T`)
+      holdingVar.splice(i,1,`A`)
+    else if (holdingVar[i] === `C`)
+      holdingVar.splice(i,1,`G`)
+    else if (holdingVar[i] === `G`)
+      holdingVar.splice(i,1,`C`)
+  }
+  return holdingVar.join(``)
+} // end dnaStrand
+console.log(`test fordnaStrand ${dnaStrand(`ACAAT`)}`);
+
+
+
+//Create a function that returns the sum of the two lowest positive numbers given an array 
+// of minimum 4 positive integers. No floats or non-positive integers will be passed.
+
+//For example, when an array is passed like [19, 5, 42, 2, 77], the output should be 7.
+
+function sumTwoSmallestNumbers(numbers) {  
+  let numArray = numbers
+  numArray = numArray.sort((a, b) => a - b);
+  return numArray[0] + numArray[1]
+}
+
 
 
 // DO NOT MODIFY
